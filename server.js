@@ -16,8 +16,8 @@ mongoose.connect('mongodb://localhost/xenia', {
   .catch(err => console.log('MongoDB connection error:', err));
 
 // Models
-const User = require('./models/User');
-const Game = require('./models/Game');
+const User = require('./models/User.js');
+const Game = require('./models/Game.js');
 
 const app = express();
 const server = http.createServer(app);
