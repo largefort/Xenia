@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Dashboard</title>
+</head>
+<body>
+    <h1>Developer Dashboard</h1>
+    <h2>Submit a New Game</h2>
+    <form action="/submit-game" method="post">
+        <label for="name">Game Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="genre">Game Genre:</label>
+        <input type="text" id="genre" name="genre" required><br><br>
+        <label for="iframe">Game iFrame:</label>
+        <textarea id="iframe" name="iframe" required></textarea><br><br>
+        <button type="submit">Submit Game</button>
+    </form>
+    <h2>Your Games</h2>
+    <div id="gamesList"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/my-games')
+            .then(response => response.json())
+            .then(games => {
+                const listContainer = document.getElementById('gamesList');
+                games.forEach(game => {
+                    const item = document.createElement('div');
+                    item.innerHTML = `<h3>${game.name}</h3><p>${game.genre}</p><div>${game.iframe}</div>`;
+                    listContainer.appendChild(item);
+                });
+            })
+            .catch(error => console.error('Error loading games:', error));
+        });
+    </script>
+</body>
+</html>
